@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~roboto-fontface/css/roboto/roboto-fontface.css";
+
+html {
+  background-color: #fafafa;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+input, select, option, button {
+  font-family: inherit;
+  font-size: inherit;
+}
