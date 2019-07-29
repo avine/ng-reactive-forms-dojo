@@ -1,1 +1,53 @@
-<p>form1 works!</p>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+  <label class="form-control">
+    Gender<br>
+    <select formControlName="gender" required>
+      <option>Male</option>
+      <option>Female</option>
+    </select>
+    <span class="error" *ngIf="isInvalid('gender')">Required</span>
+  </label>
+
+  <label class="form-control">
+    First name<br><input formControlName="firstName" required>
+    <span class="error" *ngIf="isInvalid('firstName')">Required</span>
+  </label>
+
+  <label class="form-control">
+    Last name<br><input formControlName="lastName" required>
+    <span class="error" *ngIf="isInvalid('lastName')">Required</span>
+  </label>
+
+  <label class="form-control">
+    Email<br><input type="email" formControlName="email" required>
+    <span class="error" *ngIf="isInvalid('email')">
+      <ng-container *ngIf="emailErrors['required']">Required</ng-container>
+      <ng-container *ngIf="emailErrors['email']">Invalid Email</ng-container>
+    </span>
+  </label>
+
+  <fieldset class="address" formGroupName="address">
+    <legend>Address</legend>
+
+    <label class="form-control">
+      Street<br><input formControlName="street">
+    </label>
+    <label class="form-control">
+      Zip<br><input formControlName="zip">
+    </label>
+    <label class="form-control">
+      City<br><input formControlName="city">
+    </label>
+    <label class="form-control">
+      Country<br><input formControlName="country">
+      <span class="error" *ngIf="isInvalid('address.country')">
+        Allowed countries: {{ countries.join(', ') }}
+      </span>
+    </label>
+  </fieldset>
+
+  <button [disabled]="!profileForm.valid">Submit</button>
+
+  <pre>{{ profileForm.value | json }}</pre>
+</form>
